@@ -2,6 +2,9 @@ import React,{Component} from 'react'
 import axios from 'axios'
 import {Button} from 'reactstrap'
 import ShowWords from './ShowWords';
+
+//This component gets all the words and 
+//displays (5 of them ) using ShowWords Component
 class Words extends Component
 {
     constructor(props)
@@ -9,10 +12,12 @@ class Words extends Component
         super(props)
         this.state={
             data:[],
-            info:[]
+            info:[],
+            flags:[false,false,false,false,false]
         }
     }
 
+    //At the start, get the data from the back-end
     componentDidMount(){
         axios.get('http://172.16.18.66:8080/words/all')
         .then(
@@ -30,23 +35,27 @@ class Words extends Component
         })
     }
 
+    //handler for showMore button. Randomizes data and displays it
+    //flags are used to disable a button when clicked
     show = ()=>{
         var x = Math.floor(Math.random()*317)
         var info = this.state.data.slice(x,x+5)
+        var flags = [false,false,false,false,false]
         this.setState({
-            info : info
+            info : info,
+            flags:flags
         })
     }
 
     render()
     {
-        var flags=[false,false,false,false,false]
+        // var flags=[false,false,false,false,false]
         return(
             <div>
                 <Button onClick={this.show} color="info">Show More</Button>
                 <br/>
                 <br/>
-                <ShowWords data={this.state.info} flag="AllWords" flags={flags} userid={this.props.userid}/>
+                <ShowWords data={this.state.info} flag="AllWords" flags={this.state.flags} userid={this.props.userid}/>
             </div>
         )
     }

@@ -1,8 +1,9 @@
 import React,{Component} from 'react'
 import axios from 'axios';
-
 import ShowWords from './ShowWords';
 
+//This component gets all the words for a user
+//and displays them using ShowWords Component
 class WordsForUser extends Component
 {
 
@@ -15,6 +16,7 @@ class WordsForUser extends Component
         }
     }
 
+    //At the start, the data is collected from the database
     componentDidMount()
     {
         axios.get('http://localhost:8080/users/words/'+this.props.userid)
@@ -32,7 +34,9 @@ class WordsForUser extends Component
         })
     }
 
-    componentDidUpdate()
+    //Whenever a learnt word is removed or added
+    //the state is updated, and this method gathers the data again
+    async componentDidUpdate()
     {
         axios.get('http://localhost:8080/users/words/'+this.props.userid)
         .then(

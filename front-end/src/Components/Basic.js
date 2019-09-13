@@ -1,10 +1,12 @@
 import React,{Component} from 'react'
 import '../App.css';
 import { Spinner } from 'reactstrap';
+import {Button} from 'reactstrap'
 import Words from './Words';
 import WordsForUser from './WordsForUser';
 import { TabContent, TabPane, Nav, NavItem, NavLink,Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import Loginscreen from '../Loginscreen'
 
 
 class Basic extends Component
@@ -19,6 +21,7 @@ class Basic extends Component
         };
     }
 
+    //To toggle between tabs
     toggle(tab){
         if(this.state.activeTab!==tab)
         {
@@ -26,6 +29,13 @@ class Basic extends Component
                 activeTab:tab
             });
         }
+    }
+
+    //handler for Logout Button
+    handleClick = () =>{
+        var loginPage =[];
+        loginPage.push(<Loginscreen parentContext={this}/>);
+        this.props.appContext.setState({loginPage:loginPage,uploadScreen:[],flag:true})
     }
 
 
@@ -45,6 +55,9 @@ class Basic extends Component
                 </h3>
                 <br/>
                 </div>
+                <div align="right">
+                <Button color="danger" onClick={this.handleClick}>Logout</Button>
+            </div>
             <div>
             <Nav tabs>
                 <NavItem>
@@ -78,6 +91,7 @@ class Basic extends Component
                 </TabPane>
             </TabContent>
             </div>
+            
         </div>
         )
         

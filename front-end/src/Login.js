@@ -7,6 +7,7 @@ import React,{Component} from 'react'
 import axios from 'axios'
 
 class Login extends Component {
+
     constructor(props){
     super(props);
     this.state={
@@ -15,6 +16,7 @@ class Login extends Component {
         }
     }
 
+    //handler for Login Button
     handleClick(event){
         var apiBaseUrl = "http://localhost:8080/users/";
         var self = this;
@@ -22,14 +24,17 @@ class Login extends Component {
         "name":this.state.username,
         "password":this.state.password
         }
+        //Make a post request to the back-end
         axios.post(apiBaseUrl+'login', payload)
         .then(function (response) {
             console.log(response);
             if(response.status === 200){
             console.log("Login successfull");
-            var uploadScreen=[];
-            uploadScreen.push(<Basic appContext={self.props.appContext} userid={response.data.id}/>)
-            self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
+            var userScreen=[];
+            //Make changes to the userScreen[] delegated as Context and 
+            //update it with userScreen i.e. Basic component
+            userScreen.push(<Basic appContext={self.props.appContext} userid={response.data.id}/>)
+            self.props.appContext.setState({loginPage:[],userScreen:userScreen,flag:false})
             }
             else if(response.status === 404){
             console.log("Username password do not match");

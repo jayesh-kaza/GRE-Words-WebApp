@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
-// import injectTapEventPlugin from 'react-tap-event-plugin';
-// // Needed for onTouchTap
-// // http://stackoverflow.com/a/34015469/988941
-// injectTapEventPlugin();
 import './App.css';
 import Loginscreen from './Loginscreen'
 
 
 class App extends Component {
+
   constructor(props){
     super(props);
     this.state={
+      //to store login-page components
       loginPage:[],
-      uploadScreen:[]
+      //to store user-screen components
+      userScreen:[],
+      flag:true
     }
   }
+
+  //When the component first mounts add the LoginScreen Component
   componentDidMount(){
     var loginPage =[];
     loginPage.push(<Loginscreen parentContext={this}/>);
@@ -22,13 +24,16 @@ class App extends Component {
                   loginPage:loginPage
                     })
   }
+
   render() {
+
+    //flag is to display either the loginPage first or the userScreen first
+    const x = this.state.flag?this.state.loginPage:this.state.userScreen
     return (
       <div>
         <div className="App">
-          {this.state.loginPage}
+          {x}
         </div>
-        {this.state.uploadScreen}
       </div>
     );
   }
