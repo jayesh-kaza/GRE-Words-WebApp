@@ -18,28 +18,28 @@ public class UserController {
     public UserService userService;
 
     @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000","http://localhost:8080"})
     public List<Users> getAllUsers()
     {
         return userService.getUsers();
     }
 
     @GetMapping("/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000","http://localhost:8080"})
     public Users getUserById(@PathVariable int userId)
     {
         return userService.getUserById(userId);
     }
 
     @GetMapping("/words/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000","http://localhost:8080"})
     public List<Words> getWordsLearnedByUser(@PathVariable int userId)
     {
         return userService.getUserById(userId).getWordsList();
     }
 
     @PostMapping("/login")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000","http://localhost:8080"})
     public Users checkUser(@RequestBody Users user)
     {
         user.setId(0);
@@ -54,7 +54,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000","http://localhost:8080"})
     public Users addUser(@RequestBody Users user)
     {
         int x = (int)(Math.random()*100);
@@ -64,7 +64,7 @@ public class UserController {
     }
 
     @PostMapping("/addWord")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000","http://localhost:8080"})
     public String addWords(@RequestBody Status status)
     {
         System.out.println(status);
@@ -74,7 +74,7 @@ public class UserController {
 
 
     @PostMapping("/removeWord")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000","http://localhost:8080"})
     public String removeWords(@RequestBody Status status)
     {
         System.out.println(status);

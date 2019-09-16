@@ -16,20 +16,20 @@ public class WordController {
     public WordsService wordsService;
 
     @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000","http://localhost:8080"})
     public List<Words> getWords()
     {
         return wordsService.getAllWords();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000","http://localhost:8080"})
     @GetMapping("/{wordId}")
     public Words getWord(@PathVariable int wordId)
     {
         return wordsService.getWordById(wordId);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000","http://localhost:8080"})
     @GetMapping("/users/{wordId}")
     public List<Users> getUsersWhoKnowTheWord(@PathVariable int wordId)
     {
